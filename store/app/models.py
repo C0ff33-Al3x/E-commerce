@@ -1,8 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 CATEGORY_CHOICES = (
     ('D', 'Dog'),
     ('C', 'Cat'),
+    ('F', 'Fish'),
+    ('R', 'Rodents'),
+    ('B', 'Bird'),
 )
     
 # Create your models here.
@@ -17,3 +21,14 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='product')
     def _str_(self):
         return self.title
+
+class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    locality = models.CharField(max_length=200)
+    city = models.CharField(max_length=50)
+    zipcode = models.IntegerField()
+    mobile = models.IntegerField(default=0)
+    state = models.CharField(max_length=100)
+    def _str_(self):
+        return self.name
