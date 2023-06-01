@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Product, Customer, Cart
-from .forms import CustomerRegistrationform
-from .forms import CustomerProfileForm
+from .models import Product, Customer, Cart, OrderPlaced, Payment
+from .forms import CustomerRegistrationform, CustomerProfileForm, OrderForm
 from django.db.models import Count, Q
 from django.contrib import messages
+from django.conf import settings
 from django.http import JsonResponse
 
 
@@ -115,6 +115,60 @@ def show_cart(request):
     totalamount=amount + 4
     return render(request, 'app/addtocart.html', locals())
 
+class checkout(View):
+    def get(self, request):
+        user=request.user
+        add = Customer.objects.get(user=user)
+        cart_items = Cart.objects.filter(user=user)
+        famount=0
+        for p in cart_items:
+            value=p.quantity*p.product.discounted_price
+            famount+=value
+        totalamount=famount + 4
+
+        order_form = OrderForm()
+        
+        context = {
+            'user': user,
+            'add': add,
+            'cart_items': cart_items,
+            'totalamount': totalamount,
+            'order_form': order_form,
+        }
+        return render(request, 'app/checkout.html', context)
+
+    def post(self, request):
+        order_form = OrderForm(request.POST) 
+        if order_form.is_valid():
+            user = request.user
+            add = Customer.objects.get(user=user)
+            cart_items = Cart.objects.filter(user=user)
+            famount = 0
+            for p in cart_items:
+                value = p.quantity * p.product.discounted_price
+                famount += value
+            totalamount = famount + 4
+
+            # Create Payment instance
+            payment = Payment.objects.create(user=user, amount=totalamount)
+
+            # Create OrderPlaced instances for each product in the cart
+            for c in cart_items:
+                OrderPlaced.objects.create(
+                    user=user,
+                    customer=add,
+                    product=c.product,
+                    quantity=c.quantity,
+                    payment=payment
+                )
+                c.delete()
+
+            return redirect("orders")
+        else:
+            # Handle invalid form data
+            pass
+
+
 def plus_cart(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
@@ -172,4 +226,24 @@ def remove_cart(request):
             'totalamount':totalamount
         }
         return JsonResponse(data)
-       
+
+def orders(request):
+    order_placed=OrderPlaced.objects.filter(user=request.user)
+    return render(request, 'app/orders.html', {'order_placed': order_placed})
+
+
+def payment_done(request):
+    order_id=request.GET.get('order_id')
+    customer_id=request.GET.get('customer_id')
+    user=request.user
+    customer=Customer.objects.get(id=cust_id)
+    payment.paid=True
+    payment.save()
+
+    cart=Cart.objects.filter(user=user)
+    for c in cart:
+        OrderPlaced(user=user, customer=customer,product=c.product, quantity=c.quantity, payment=payment).save()
+        c.delete()
+    return redirect("orders")
+
+

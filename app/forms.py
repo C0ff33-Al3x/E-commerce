@@ -10,7 +10,6 @@ class Loginform(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete':'current-password', 'class':'form-control'}))
     
-
 class CustomerRegistrationform(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
@@ -46,3 +45,12 @@ class CustomerProfileForm(forms.ModelForm):
             'state': forms.TextInput(attrs={'class':'form-control'}),
             'zipcode': forms.NumberInput(attrs={'class':'form-control'}),
         }
+
+class OrderForm(forms.Form):
+    PAYMENT_CHOICES = [
+        ('credit_card', 'Credit Card'),
+        ('paypal', 'PayPal'),
+    ]
+
+    payment_method = forms.ChoiceField(label='Payment Method', choices=PAYMENT_CHOICES)
+
