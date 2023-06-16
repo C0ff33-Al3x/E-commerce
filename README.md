@@ -1,7 +1,10 @@
 # Full Django E-commerce
 Progetto Django di alessia.bruno2@stud.unifi.it
 
-Non carico la cartella env perchè è troppo pesante e github non me l'accetta
+Per il deploy ho usato Render: 
+https://luna-pet-shop.onrender.com
+
+É necessario creare un account (Anche con una mail finta) e mettere un indirizzo(Anche questo finto) per utilizzareil sito senza problemi e in tutte le sue funzionalità.
 
 ELENCO FUNZIONALITA'
 - Aggiungere/togliere oggetti dal carrello
