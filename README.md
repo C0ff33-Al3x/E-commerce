@@ -17,9 +17,9 @@ ELENCO FUNZIONALITA'
 - finta selezione di modalità di pagamento per procedere all'ordine
 
 Da parte dell'admin
--creare nuovi articoli da mettere in vendita
--gestire utenti, carrelli e liste desideri
--gestire lo stato degli ordini (spedito, accettato, in consegna, cancellato ecc...)
+- creare nuovi articoli da mettere in vendita
+- gestire utenti, carrelli e liste desideri
+- gestire lo stato degli ordini (spedito, accettato, in consegna, cancellato ecc...)
 
 
 
