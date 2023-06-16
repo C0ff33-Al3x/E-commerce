@@ -6,6 +6,10 @@ https://luna-pet-shop.onrender.com
 
 É necessario creare un account (Anche con una mail finta) e mettere un indirizzo(Anche questo finto) per utilizzareil sito senza problemi e in tutte le sue funzionalità.
 
+Per accedere ai privilegi da amministratore e creare nuoi prodotti, camiare lo stato degli ordini eccetera nella pagina https://luna-pet-shop.onrender.com/admin/ inserire le credenziali
+Username: alessia
+Password: rebecca2002
+
 ELENCO FUNZIONALITA'
 - Aggiungere/togliere oggetti dal carrello
 - Presi degli oggetti nel carrello posso aumentare/diminuire la quantità a piacimento (javascript)
