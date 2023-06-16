@@ -18,7 +18,7 @@
                         <div>
                             <img src="{{ product.product_image.url }}" width="300px" height="200px" />
                             <div class="fw-bold">{{ product.title }}</div>
-                            <div class="fw-bold text-danger">Rs.{{ product.discounted_price }}/-<small class="fw-light text-decoration.line-through">{{ product.selling_price }}</small></div>
+                            <div class="fw-bold text-danger">${{ product.discounted_price }}/-<small class="fw-light text-decoration.line-through">{{ product.selling_price }}</small></div>
                         </div>
                     </a>
                 </div>

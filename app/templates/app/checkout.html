@@ -20,12 +20,12 @@
             <div class="card-body">
                 <h5>Product: {{item.product.title}}</h5>
                 <p>Quantity: {{item.quantity}}</p>
-                <p>Price: Rs. {{item.product.discounted_price}}</p>
+                <p>Price: $ {{item.product.discounted_price}}</p>
             </div>
         </div>
         {% endfor %}
-        <p class="text-right">Shipping: Rs. 4</p>
-        <p class="text-right">Total: Rs. {{totalamount}}</p>
+        <p class="text-right">Shipping: $ 4</p>
+        <p class="text-right">Total: $ {{totalamount}}</p>
         <small>Terms and conditions: Lorem ipsum dolor sit amet... </small>
         </div>
         <div class="col-sm-4 offset-sm-1">
